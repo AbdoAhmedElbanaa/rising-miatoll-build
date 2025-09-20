@@ -1,0 +1,46 @@
+# .crave file for building RisingOS-Revived for miatoll
+
+# 1. Define the base ROM source code
+source:
+  git:
+    url: https://github.com/RisingOS-Revived/android
+    branch: sixteen-aosp
+
+# 2. Define all your device-specific repositories (your local manifest)
+remotes:
+  - name: RiteshSahany
+    url: https://github.com/RiteshSahany
+
+manifest:
+  - project: device_xiaomi_miatoll
+    path: device/xiaomi/miatoll
+    remote: RiteshSahany
+    branch: '16'
+
+  - project: kernel_xiaomi_sm6250
+    path: kernel/xiaomi/sm6250
+    remote: RiteshSahany
+    branch: '16.0'
+
+  - project: vendor_xiaomi_miatoll
+    path: vendor/xiaomi/miatoll
+    remote: RiteshSahany
+    branch: '16'
+    
+  - project: hardware_xiaomi
+    path: hardware/xiaomi
+    remote: RiteshSahany
+    branch: '16'
+    
+  - project: vendor_xiaomi_miuicamera
+    path: vendor/xiaomi/miuicamera
+    remote: RiteshSahany
+    branch: '16'
+
+# 3. Define the build commands
+tasks:
+  - name: Build RisingOS
+    script:
+      - source build/envsetup.sh
+      - lunch rising_miatoll-userdebug
+      - mka bacon
